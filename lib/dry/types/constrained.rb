@@ -84,7 +84,9 @@ module Dry
       # @see Dry::Logic::Operators#and
       #
       # @api public
-      def constrained(options)
+      def constrained(*nullary_options, **unary_options)
+        options = nullary_options.zip([]).to_h.merge(unary_options)
+
         with(rule: rule & Types.Rule(options))
       end
 
