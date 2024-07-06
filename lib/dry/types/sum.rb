@@ -86,7 +86,7 @@ module Dry
       # @api public
       def constrained(options)
         if optional?
-          right.constrained(options).optional
+          right.constrained(**options).optional
         else
           super
         end
