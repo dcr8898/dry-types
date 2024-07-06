@@ -102,7 +102,7 @@ RSpec.describe Dry::Types::PredicateInferrer, "#[]" do
     end
 
     it "works with rules without additional parameters" do
-      expect(inferrer[type(:integer).constrained([:odd])]).to eql([:int?, :odd?])
+      expect(inferrer[type(:integer).constrained(:odd)]).to eql([:int?, :odd?])
     end
 
     it "can extract many rules" do
@@ -113,11 +113,11 @@ RSpec.describe Dry::Types::PredicateInferrer, "#[]" do
 
     it "infers chained types" do
       expect(
-        inferrer[type(:integer).constrained([:odd]).constrained(gteq: 18, lt: 100)]
+        inferrer[type(:integer).constrained(:odd, gteq: 18, lt: 100)]
       ).to eql([:int?, :odd?, gteq?: 18, lt?: 100])
 
       expect(
-        inferrer[type(:integer).constrained(gteq: 18, lt: 100).constrained([:odd])]
+        inferrer[type(:integer).constrained(gteq: 18, lt: 100).constrained(:odd)]
       ).to eql([:int?, :odd?, gteq?: 18, lt?: 100])
     end
 
