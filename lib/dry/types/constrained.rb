@@ -85,7 +85,7 @@ module Dry
       #
       # @api public
       def constrained(*nullary_options, **unary_options)
-        options = nullary_options.zip([]).to_h.merge(unary_options)
+        options = nullary_options.flatten.zip([]).to_h.merge(unary_options)
 
         with(rule: rule & Types.Rule(options))
       end
